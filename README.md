@@ -14,7 +14,6 @@
 ------------
 ## Создание проекта
 
-1:
 ```
     php vendor\symfony\data\bin\symfony generate:project PROJECT_NAME --orm=Propel 
     или
@@ -23,7 +22,6 @@
 
 ## Создание приложения
 
-1:
 ```
     php symfony generate:app frontend
 ```
@@ -31,7 +29,6 @@
 ## Создание модуля
 
 
-1:
 ```
     php symfony generate:module frontend hello_world 
 ```
