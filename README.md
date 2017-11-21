@@ -3,13 +3,18 @@
 ## Установка
 ------------
 1 Способ:
+С помощью git
 ```
     git init # ваш проект
     git submodule add https://github.com/vadimDol/symfony1 vendor/symfony
     git submodule update --init --recursive
 ```
 
-Скоро будет добавлена возможность установки через composer
+2 Способ
+С помощью [Composer](https://getcomposer.org/download/) 
+```
+    composer require vadimdol/symfony1 "1.1.0"
+```
 
 ------------
 ## Создание проекта
