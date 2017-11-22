@@ -356,8 +356,8 @@ class sfToolkit
    */
   public static function pregtr($search, $replacePairs)
   {
-    //return preg_replace(array_keys($replacePairs), array_values($replacePairs), $search);
-	return strtr($search, $replacePairs);
+    return preg_replace(array_keys($replacePairs), array_values($replacePairs), $search);
+	//return strtr($search, $replacePairs);
   }
 
   /**
