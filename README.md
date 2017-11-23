@@ -18,7 +18,7 @@
 
 С помощью [Composer](https://getcomposer.org/download/) 
 ```
-    composer require vadimdol/symfony1 "1.1.0"
+    composer require vadimdol/symfony1 "1.0"
 ```
 
 ------------
