@@ -153,7 +153,8 @@ CREATE TABLE ".$this->quoteIdentifier($this->prefixTablename($table->getName()))
 			}
 		}
 
-		$script .= "Engine=$mysqlTableType";
+        // symfony source modified. Was: $script .= "Type=$mysqlTableType";
+        $script .= "Engine=$mysqlTableType";
 
 		$dbVendorSpecific = $table->getDatabase()->getVendorInfoForType($databaseType);
 		$tableVendorSpecific = $table->getVendorInfoForType($databaseType);

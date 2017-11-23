@@ -69,7 +69,11 @@ class sfAutoloadAgain
     {
       foreach ($autoloads as $position => $autoload)
       {
-        if ($this === $autoload[0])
+
+    
+    
+    //    if ($this === $autoload[0])
+        if (is_array($autoload) && $this === $autoload[0])
         {
           break;
         }

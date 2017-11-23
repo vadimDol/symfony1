@@ -20,11 +20,12 @@
  */
 abstract class sfController
 {
-  protected
-    $context           = null,
-    $dispatcher        = null,
-    $controllerClasses = array(),
-    $renderMode        = sfView::RENDER_CLIENT;
+  /** @var sfContext  */
+  protected $context = null;
+  /** @var sfEventDispatcher  */
+  protected $dispatcher = null;
+  protected $controllerClasses = [];
+  protected $renderMode = sfView::RENDER_CLIENT;
 
   /**
    * Class constructor.

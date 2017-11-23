@@ -175,6 +175,7 @@ class PropelGraphvizTask extends AbstractPropelDataModelTask {
 	function writeDot($dotSyntax, PhingFile $outputDir, $baseFilename) {
 		$file = new PhingFile($outputDir, $baseFilename . '.schema.dot');
 		$this->log("Writing dot file to " . $file->getAbsolutePath());
+        $dotSyntax = str_replace("\r\n", "\n", $dotSyntax);
 		file_put_contents($file->getAbsolutePath(), $dotSyntax);
 	}
 

@@ -37,6 +37,14 @@ abstract class sfRequest implements ArrayAccess
     $attributeHolder = null;
 
   /**
+   * @param string $content
+   */
+  public function setContent($content)
+  {
+    $this->content = $content;
+  }
+
+  /**
    * Class constructor.
    *
    * @see initialize()

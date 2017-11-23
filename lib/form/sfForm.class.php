@@ -154,7 +154,7 @@ class sfForm implements ArrayAccess, Iterator, Countable
    * @param boolean $recursive False will prevent hidden fields from embedded forms from rendering
    *
    * @return string
-   * 
+   *
    * @see sfFormFieldSchema
    */
   public function renderHiddenFields($recursive = true)
@@ -224,6 +224,7 @@ class sfForm implements ArrayAccess, Iterator, Countable
 
     try
     {
+
       $this->doBind(self::deepArrayUnion($this->taintedValues, self::convertFileInformation($this->taintedFiles)));
       $this->errorSchema = new sfValidatorErrorSchema($this->validatorSchema);
 
@@ -463,7 +464,7 @@ class sfForm implements ArrayAccess, Iterator, Countable
    * @param  string $name The name used to embed the form
    *
    * @return sfForm
-   * 
+   *
    * @throws InvalidArgumentException If there is no form embedded with the supplied name
    */
   public function getEmbeddedForm($name)
@@ -583,7 +584,7 @@ class sfForm implements ArrayAccess, Iterator, Countable
    * Set a validator for the given field name.
    *
    * @param string      $name      The field name
-   * @param sfValidator $validator The validator
+   * @param sfValidatorBase $validator The validator
    *
    * @return sfForm The current form instance
    */
@@ -601,7 +602,7 @@ class sfForm implements ArrayAccess, Iterator, Countable
    *
    * @param  string      $name      The field name
    *
-   * @return sfValidator $validator The validator
+   * @return sfValidatorBase $validator The validator
    */
   public function getValidator($name)
   {

@@ -20,6 +20,8 @@
  */
 class sfFilterChain
 {
+    private $counter = 0;
+
   protected
     $chain = array(),
     $index = -1;
@@ -39,6 +41,7 @@ class sfFilterChain
    */
   public function execute()
   {
+    // skip to the next filter
     // skip to the next filter
     ++$this->index;
 

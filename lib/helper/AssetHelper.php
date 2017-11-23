@@ -178,14 +178,14 @@ function stylesheet_path($source, $absolute = false)
  * <b>Examples:</b>
  * <code>
  *  echo stylesheet_tag('style');
- *    => <link href="/stylesheets/style.css" media="screen" rel="stylesheet" type="text/css" />
+ *    => <link href="/stylesheets/style.css" rel="stylesheet" type="text/css" />
  *  echo stylesheet_tag('style', array('media' => 'all'));
  *    => <link href="/stylesheets/style.css" media="all" rel="stylesheet" type="text/css" />
  *  echo stylesheet_tag('style', array('raw_name' => true));
  *    => <link href="style" media="all" rel="stylesheet" type="text/css" />
  *  echo stylesheet_tag('random.styles', '/css/stylish');
- *    => <link href="/stylesheets/random.styles" media="screen" rel="stylesheet" type="text/css" />
- *       <link href="/css/stylish.css" media="screen" rel="stylesheet" type="text/css" />
+ *    => <link href="/stylesheets/random.styles" rel="stylesheet" type="text/css" />
+ *       <link href="/css/stylish.css" rel="stylesheet" type="text/css" />
  * </code>
  *
  * @param string asset names
@@ -225,7 +225,7 @@ function stylesheet_tag()
       unset($sourceOptions['raw_name']);
     }
 
-    $options = array_merge(array('rel' => 'stylesheet', 'type' => 'text/css', 'media' => 'screen', 'href' => $source), $sourceOptions);
+    $options = array_merge(array('rel' => 'stylesheet', 'type' => 'text/css', 'href' => $source), $sourceOptions);
     $tag = tag('link', $options);
 
     if (null !== $condition)

@@ -162,7 +162,9 @@ class sfSimpleAutoload
     {
       if (is_writable(dirname($this->cacheFile)))
       {
+        $savedUmask = umask(0111);
         file_put_contents($this->cacheFile, serialize(array($this->classes, $this->dirs, $this->files)));
+        umask($savedUmask);
       }
 
       $this->cacheChanged = false;

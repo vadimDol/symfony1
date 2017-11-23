@@ -3,7 +3,7 @@
 /*
  * This file is part of the symfony package.
  * (c) 2004-2006 Fabien Potencier <fabien.potencier@symfony-project.com>
- * 
+ *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
@@ -148,7 +148,7 @@ class sfFileCache extends sfCache
     $result = true;
     foreach (new RecursiveIteratorIterator(new RecursiveDirectoryIterator($this->getOption('cache_dir'))) as $file)
     {
-      if (sfCache::ALL == $mode || !$this->isValid($file))
+      if ((sfCache::ALL == $mode || !$this->isValid($file)) && (preg_match('%\/\.{1,2}$%m', $file) !== 1))
       {
         $result = @unlink($file) && $result;
       }
@@ -185,7 +185,7 @@ class sfFileCache extends sfCache
     {
       return 0;
     }
-    
+
     $data = $this->read($path, self::READ_TIMEOUT | self::READ_LAST_MODIFIED);
 
     if ($data[self::READ_TIMEOUT] < time())

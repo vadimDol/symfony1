@@ -110,7 +110,7 @@ class sfValidatorSchema extends sfValidatorBase implements ArrayAccess
     $errorSchema = new sfValidatorErrorSchema($this);
 
     // check that post_max_size has not been reached
-    if (isset($_SERVER['CONTENT_LENGTH']) && (int) $_SERVER['CONTENT_LENGTH'] > $this->getBytes(ini_get('post_max_size')))
+    if (isset($_SERVER['CONTENT_LENGTH']) && (int) $_SERVER['CONTENT_LENGTH'] > $this->getMaxPostBytes())
     {
       $errorSchema->addError(new sfValidatorError($this, 'post_max_size'));
 
@@ -347,7 +347,7 @@ class sfValidatorSchema extends sfValidatorBase implements ArrayAccess
   /**
    * Returns an array of fields.
    *
-   * @return sfValidatorBase An array of sfValidatorBase instances
+   * @return sfValidatorBase[] An array of sfValidatorBase instances
    */
   public function getFields()
   {
@@ -380,10 +380,12 @@ class sfValidatorSchema extends sfValidatorBase implements ArrayAccess
     }
   }
 
-  protected function getBytes($value)
+  protected function getMaxPostBytes()
   {
-    $value = trim($value);
-    switch (strtolower($value[strlen($value) - 1]))
+    $maxPostSizeStr = strtolower(trim(ini_get('post_max_size')));
+    $value = (int) $maxPostSizeStr;
+
+    switch ($maxPostSizeStr[strlen($maxPostSizeStr) - 1])
     {
       // The 'G' modifier is available since PHP 5.1.0
       case 'g':

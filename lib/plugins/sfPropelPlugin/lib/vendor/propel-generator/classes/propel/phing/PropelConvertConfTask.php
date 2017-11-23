@@ -134,6 +134,7 @@ class PropelConvertConfTask extends AbstractPropelDataModelTask {
 		$output .= ";";
 
 		$this->log("Creating PHP runtime conf file: " . $outfile->getPath());
+        $output = str_replace("\r\n", "\n", $output);
 		if (!file_put_contents($outfile->getAbsolutePath(), $output)) {
 			throw new BuildException("Error creating output file: " . $outfile->getAbsolutePath(), $this->getLocation());
 		}

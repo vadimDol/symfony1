@@ -133,7 +133,7 @@ abstract class BaseObject {
 	/**
 	 * Code to be run before persisting the object
 	 * @param PropelPDO $con
-	 * @return bloolean
+	 * @return boolean
 	 */
 	public function preSave(PropelPDO $con = null)
 	{
@@ -155,10 +155,10 @@ abstract class BaseObject {
 	{
 		return true;
 	}
-	
+
 	/**
 	 * Code to be run after inserting to database
-	 * @param PropelPDO $con 
+	 * @param PropelPDO $con
 	 */
 	public function postInsert(PropelPDO $con = null) { }
 
@@ -193,7 +193,7 @@ abstract class BaseObject {
 	 * @param PropelPDO $con
 	 */
 	public function postDelete(PropelPDO $con = null) { }
-	
+
 	/**
 	 * Sets the modified state for the object to be false.
 	 * @param      string $col If supplied, only the specified column is reset.
@@ -217,8 +217,8 @@ abstract class BaseObject {
 	 * <code>obj</code> is an instance of <code>BaseObject</code>, delegates to
 	 * <code>equals(BaseObject)</code>.  Otherwise, returns <code>false</code>.
 	 *
-	 * @param      obj The object to compare to.
-	 * @return     Whether equal to the object specified.
+	 * @param mixed $obj The object to compare to.
+	 * @return bool Whether equal to the object specified.
 	 */
 	public function equals($obj)
 	{

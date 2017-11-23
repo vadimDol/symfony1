@@ -3,7 +3,7 @@
 /*
  * This file is part of the symfony package.
  * (c) 2004-2006 Fabien Potencier <fabien.potencier@symfony-project.com>
- * 
+ *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
@@ -74,7 +74,7 @@ abstract class sfComponent
    *
    * @return mixed     A string containing the view name associated with this action
    */
-  abstract function execute($request);
+  abstract public function execute($request);
 
   /**
    * Gets the module name associated with this component.
@@ -101,7 +101,7 @@ abstract class sfComponent
    *
    * @return sfContext The current sfContext instance
    */
-  public final function getContext()
+  public function getContext()
   {
     return $this->context;
   }

@@ -64,7 +64,7 @@ abstract class sfTestFunctionalBase
    *
    * @param string   $name The tester name
    *
-   * @param sfTester A sfTester instance
+   * @return sfTester A sfTester instance
    */
   public function with($name)
   {

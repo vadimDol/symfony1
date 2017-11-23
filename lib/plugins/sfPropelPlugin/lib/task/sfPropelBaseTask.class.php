@@ -53,7 +53,7 @@ abstract class sfPropelBaseTask extends sfBaseTask
 
   protected function schemaToYML($checkSchema = self::CHECK_SCHEMA, $prefix = '')
   {
-    $finder = sfFinder::type('file')->name('*schema.xml')->prune('doctrine');
+    $finder = sfFinder::type('file')->name('*schema.xml');
 
     $schemas = array_unique(array_merge($finder->in(sfConfig::get('sf_config_dir')), $finder->in($this->configuration->getPluginSubPaths('/config'))));
     if (self::CHECK_SCHEMA === $checkSchema && !count($schemas))
@@ -87,7 +87,7 @@ abstract class sfPropelBaseTask extends sfBaseTask
 
   protected function schemaToXML($checkSchema = self::CHECK_SCHEMA, $prefix = '')
   {
-    $finder = sfFinder::type('file')->name('*schema.yml')->prune('doctrine');
+    $finder = sfFinder::type('file')->name('*schema.yml');
     $dirs = array_merge(array(sfConfig::get('sf_config_dir')), $this->configuration->getPluginSubPaths('/config'));
     $schemas = $finder->in($dirs);
     if (self::CHECK_SCHEMA === $checkSchema && !count($schemas))
@@ -162,7 +162,7 @@ abstract class sfPropelBaseTask extends sfBaseTask
       return;
     }
 
-    $schemas = sfFinder::type('file')->name('*schema.xml')->prune('doctrine')->in($dirs);
+    $schemas = sfFinder::type('file')->name('*schema.xml')->in($dirs);
     foreach ($schemas as $schema)
     {
       // reset local prefix

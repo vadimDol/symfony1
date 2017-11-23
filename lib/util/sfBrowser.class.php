@@ -31,8 +31,6 @@ class sfBrowser extends sfBrowserBase
     // recycle our context object
     $this->context = $this->getContext(true);
 
-    sfConfig::set('sf_test', true);
-
     // we register a fake rendering filter
     sfConfig::set('sf_rendering_filter', array('sfFakeRenderingFilter', null));
 
@@ -66,7 +64,7 @@ class sfBrowser extends sfBrowserBase
     if (null === $this->context || $forceReload)
     {
       $isContextEmpty = null === $this->context;
-      $context = $isContextEmpty ? sfContext::getInstance() : $this->context;
+      $context = $isContextEmpty ? $this->getContextInstance() : $this->context;
 
       // create configuration
       $currentConfiguration = $context->getConfiguration();
@@ -80,7 +78,7 @@ class sfBrowser extends sfBrowserBase
       }
 
       // create context
-      $this->context = sfContext::createInstance($configuration);
+      $this->context = $this->createContextInstance($configuration);
       unset($currentConfiguration);
 
       if (!$isContextEmpty)
@@ -155,6 +153,16 @@ class sfBrowser extends sfBrowserBase
   public function listenToException(sfEvent $event)
   {
     $this->setCurrentException($event->getSubject());
+  }
+
+  protected function getContextInstance()
+  {
+      return sfContext::getInstance();
+  }
+
+  protected function createContextInstance($configuration)
+  {
+      return sfContext::createInstance($configuration);
   }
 }
 

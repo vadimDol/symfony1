@@ -48,7 +48,7 @@ In fact this will send the [plugin.post_install|INFO] event to each plugin.
 You can specify which plugin or plugins should install their assets by passing
 those plugins' names as arguments:
 
-  [./symfony plugin:publish-assets sfDoctrinePlugin|INFO]
+  [./symfony plugin:publish-assets sfPropelPlugin|INFO]
 EOF;
   }
 

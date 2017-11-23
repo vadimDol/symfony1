@@ -18,110 +18,109 @@
  */
 class SfPropelBehaviorSymfony extends SfPropelBehaviorBase
 {
-  protected $parameters = array(
-    'form'   => 'true',
-    'filter' => 'true',
-  );
+    protected $parameters = array(
+        'form' => 'true',
+        'filter' => 'true',
+    );
 
-  public function modifyDatabase()
-  {
-    foreach ($this->getDatabase()->getTables() as $table)
+    public function modifyDatabase()
     {
-      $behaviors = $table->getBehaviors();
-
-      if (!isset($behaviors['symfony']))
-      {
-        $behavior = clone $this;
-        $table->addBehavior($behavior);
-      }
-
-      // symfony behaviors
-      if (!isset($behaviors['symfony_behaviors']) && $this->getBuildProperty('propel.builder.addBehaviors'))
-      {
-        $class = Propel::importClass($this->getBuildProperty('propel.behavior.symfony_behaviors.class'));
-        $behavior = new $class();
-        $behavior->setName('symfony_behaviors');
-        $table->addBehavior($behavior);
-      }
-
-      // timestampable
-      if (!isset($behaviors['symfony_timestampable']))
-      {
-        $parameters = array();
-        foreach ($table->getColumns() as $column)
+        foreach ($this->getDatabase()->getTables() as $table)
         {
-          if (!isset($parameters['create_column']) && in_array($column->getName(), array('created_at', 'created_on')))
-          {
-            $parameters['create_column'] = $column->getName();
-          }
+            $behaviors = $table->getBehaviors();
 
-          if (!isset($parameters['update_column']) && in_array($column->getName(), array('updated_at', 'updated_on')))
-          {
-            $parameters['update_column'] = $column->getName();
-          }
+            if (!isset($behaviors['symfony']))
+            {
+                $behavior = clone $this;
+                $table->addBehavior($behavior);
+            }
+
+            // symfony behaviors
+            if (!isset($behaviors['symfony_behaviors']) && $this->getBuildProperty('propel.builder.addBehaviors'))
+            {
+                $class    = Propel::importClass($this->getBuildProperty('propel.behavior.symfony_behaviors.class'));
+                $behavior = new $class();
+                $behavior->setName('symfony_behaviors');
+                $table->addBehavior($behavior);
+            }
+
+            // timestampable
+            if (!isset($behaviors['symfony_timestampable']))
+            {
+                $parameters = array();
+                foreach ($table->getColumns() as $column)
+                {
+                    if (!isset($parameters['create_column']) && in_array($column->getName(), array('created_at', 'created_on')))
+                    {
+                        $parameters['create_column'] = $column->getName();
+                    }
+
+                    if (!isset($parameters['update_column']) && in_array($column->getName(), array('updated_at', 'updated_on')))
+                    {
+                        $parameters['update_column'] = $column->getName();
+                    }
+                }
+
+                if ($parameters)
+                {
+                    $class    = Propel::importClass($this->getBuildProperty('propel.behavior.symfony_timestampable.class'));
+                    $behavior = new $class();
+                    $behavior->setName('symfony_timestampable');
+                    $behavior->setParameters($parameters);
+                    $table->addBehavior($behavior);
+                }
+            }
         }
-
-        if ($parameters)
-        {
-          $class = Propel::importClass($this->getBuildProperty('propel.behavior.symfony_timestampable.class'));
-          $behavior = new $class();
-          $behavior->setName('symfony_timestampable');
-          $behavior->setParameters($parameters);
-          $table->addBehavior($behavior);
-        }
-      }
-    }
-  }
-
-  public function objectAttributes()
-  {
-    if ($this->isDisabled())
-    {
-      return;
     }
 
-    return <<<EOF
+    public function objectAttributes()
+    {
+        if ($this->isDisabled())
+        {
+            return;
+        }
+
+        return <<<EOF
 
 const PEER = '{$this->getTable()->getPhpName()}Peer';
 
 EOF;
-  }
-
-  public function staticAttributes()
-  {
-    if ($this->isDisabled())
-    {
-      return;
     }
 
-    $behaviors = $this->getTable()->getBehaviors();
-    $isI18n = isset($behaviors['symfony_i18n']) ? 'true' : 'false';
+    public function staticAttributes()
+    {
+        if ($this->isDisabled())
+        {
+            return;
+        }
 
-    return <<<EOF
+        $behaviors = $this->getTable()->getBehaviors();
+        $isI18n    = isset($behaviors['symfony_i18n']) ? 'true' : 'false';
 
+        return <<<EOF
 /**
  * Indicates whether the current model includes I18N.
  */
 const IS_I18N = {$isI18n};
 
 EOF;
-  }
-
-  public function staticMethods()
-  {
-    if ($this->isDisabled())
-    {
-      return;
     }
 
-    $unices = array();
-    foreach ($this->getTable()->getUnices() as $unique)
+    public function staticMethods()
     {
-      $unices[] = sprintf("array('%s')", implode("', '", $unique->getColumns()));
-    }
-    $unices = implode(', ', array_unique($unices));
+        if ($this->isDisabled())
+        {
+            return;
+        }
 
-    return <<<EOF
+        $unices = array();
+        foreach ($this->getTable()->getUnices() as $unique)
+        {
+            $unices[] = sprintf("array('%s')", implode("', '", $unique->getColumns()));
+        }
+        $unices = implode(', ', array_unique($unices));
+
+        return <<<EOF
 
 /**
  * Returns an array of arrays that contain columns in each unique index.
@@ -134,5 +133,5 @@ static public function getUniqueColumnNames()
 }
 
 EOF;
-  }
+    }
 }

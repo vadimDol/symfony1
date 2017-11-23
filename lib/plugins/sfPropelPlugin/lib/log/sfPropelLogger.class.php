@@ -105,6 +105,8 @@ class sfPropelLogger implements BasicLogger
    */
   public function debug($message)
   {
+      /*$e = new Exception();
+      $this->log($e->getTraceAsString(), sfLogger::DEBUG);*/
     $this->log($message, sfLogger::DEBUG);
   }
 

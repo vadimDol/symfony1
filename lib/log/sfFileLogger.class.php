@@ -3,7 +3,7 @@
 /*
  * This file is part of the symfony package.
  * (c) 2004-2006 Fabien Potencier <fabien.potencier@symfony-project.com>
- * 
+ *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
@@ -21,7 +21,7 @@ class sfFileLogger extends sfLogger
   protected
     $type       = 'symfony',
     $format     = '%time% %type% [%priority%] %message%%EOL%',
-    $timeFormat = '%b %d %H:%M:%S',
+    $timeFormat = '%b %d %H:%M:%S.%u',
     $fp         = null;
 
   /**
@@ -93,10 +93,15 @@ class sfFileLogger extends sfLogger
   protected function doLog($message, $priority)
   {
     flock($this->fp, LOCK_EX);
-    fwrite($this->fp, strtr($this->format, array(
+
+      $t = microtime(true);
+      $micro = sprintf("%06d", ($t - floor($t)) * 1000000);
+      $d = new DateTime(date('Y-m-d H:i:s.' . $micro, $t));
+
+      fwrite($this->fp, strtr($this->format, array(
       '%type%'     => $this->type,
       '%message%'  => $message,
-      '%time%'     => strftime($this->timeFormat),
+      '%time%'     => $d->format("Y-m-d H:i:s.u"),
       '%priority%' => $this->getPriority($priority),
       '%EOL%'      => PHP_EOL,
     )));

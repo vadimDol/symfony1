@@ -195,6 +195,7 @@ class PropelSQLTask extends AbstractPropelDataModelTask {
 
 				#var_dump($outFile->getAbsolutePath());
 				// Now we're done.  Write the file!
+                $ddl = str_replace("\r\n", "\n", $ddl);
 				file_put_contents($outFile->getAbsolutePath(), $ddl);
 
 			} // foreach database

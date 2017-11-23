@@ -283,7 +283,7 @@ class BasePeer
 			$sql = 'INSERT INTO ' . $tableName
 			. ' (' . implode(',', $columns) . ')'
 			. ' VALUES (';
-			// . substr(str_repeat("?,", count($columns)), 0, -1) . 
+			// . substr(str_repeat("?,", count($columns)), 0, -1) .
 			for($p=1, $cnt=count($columns); $p <= $cnt; $p++) {
 				$sql .= ':p'.$p;
 				if ($p !== $cnt) $sql .= ',';
@@ -348,7 +348,7 @@ class BasePeer
 		foreach ($tablesColumns as $tableName => $columns) {
 
 			$whereClause = array();
-			
+
 			$params = array();
 
 			$stmt = null;
@@ -392,15 +392,15 @@ class BasePeer
 						}
 					}
 				}
-				
+
 				$params = self::buildParams($updateTablesColumns[$tableName], $updateValues);
-				
+
 				foreach ($columns as $colName) {
 					$sb = "";
 					$selectCriteria->getCriterion($colName)->appendPsTo($sb, $params);
 					$whereClause[] = $sb;
 				}
-			
+
 				$sql = substr($sql, 0, -2) . " WHERE " .  implode(" AND ", $whereClause);
 
 				$stmt = $con->prepare($sql);
@@ -447,6 +447,7 @@ class BasePeer
 
 		if ($criteria->isUseTransaction()) $con->beginTransaction();
 
+		$sql = '';
 		try {
 
 			$params = array();
@@ -461,9 +462,10 @@ class BasePeer
 			if ($criteria->isUseTransaction()) $con->commit();
 
 		} catch (Exception $e) {
+
 			if ($stmt) $stmt = null; // close
 			if ($criteria->isUseTransaction()) $con->rollBack();
-			Propel::log($e->getMessage(), Propel::LOG_ERR);
+			Propel::log($e->getMessage() . $sql, Propel::LOG_ERR);
 			throw new PropelException($e);
 		}
 
@@ -787,7 +789,7 @@ class BasePeer
 		// Handle joins
 		// joins with a null join type will be added to the FROM clause and the condition added to the WHERE clause.
 		// joins of a specified type: the LEFT side will be added to the fromClause and the RIGHT to the joinClause
-		foreach ((array) $criteria->getJoins() as $join) { 
+		foreach ((array) $criteria->getJoins() as $join) {
 			// The join might have been established using an alias name
 			$leftTable = $join->getLeftTableName();
 			$leftTableAlias = '';
@@ -843,7 +845,7 @@ class BasePeer
 		// Unique from clause elements
 		$fromClause = array_unique($fromClause);
 		$fromClause = array_diff($fromClause, array(''));
-		
+
 		// tables should not exist in both the from and join clauses
 		if ($joinTables && $fromClause) {
 			foreach ($fromClause as $fi => $ftable) {
@@ -936,7 +938,7 @@ class BasePeer
 		} else {
 			$from .= implode(", ", $fromClause);
 		}
-		
+
 		$from .= $joinClause ? ' ' . implode(' ', $joinClause) : '';
 
 		// Build the SQL from the arrays we compiled

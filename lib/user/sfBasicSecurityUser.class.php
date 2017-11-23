@@ -4,7 +4,7 @@
  * This file is part of the symfony package.
  * (c) 2004-2006 Fabien Potencier <fabien.potencier@symfony-project.com>
  * (c) 2004-2006 Sean Kerr <sean@code-box.org>
- * 
+ *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
@@ -23,6 +23,8 @@ class sfBasicSecurityUser extends sfUser implements sfSecurityUser
   const LAST_REQUEST_NAMESPACE = 'symfony/user/sfUser/lastRequest';
   const AUTH_NAMESPACE = 'symfony/user/sfUser/authenticated';
   const CREDENTIAL_NAMESPACE = 'symfony/user/sfUser/credentials';
+
+  const SESSION_TIMEOUT = 1800;
 
   protected $lastRequest = null;
 
@@ -43,7 +45,7 @@ class sfBasicSecurityUser extends sfUser implements sfSecurityUser
 
   /**
    * Returns the current user's credentials.
-   * 
+   *
    * @return array
    */
   public function getCredentials()
@@ -71,7 +73,7 @@ class sfBasicSecurityUser extends sfUser implements sfSecurityUser
 
           unset($this->credentials[$key]);
 
-          $this->storage->regenerate(false);
+          $this->storage->regenerate(true);
 
           return;
         }
@@ -118,7 +120,7 @@ class sfBasicSecurityUser extends sfUser implements sfSecurityUser
 
     if ($added)
     {
-      $this->storage->regenerate(false);
+      $this->storage->regenerate(true);
     }
   }
 
@@ -201,7 +203,7 @@ class sfBasicSecurityUser extends sfUser implements sfSecurityUser
 
       $this->dispatcher->notify(new sfEvent($this, 'user.change_authentication', array('authenticated' => $this->authenticated)));
 
-      $this->storage->regenerate(false);
+      $this->storage->regenerate(true);
     }
   }
 
@@ -244,7 +246,7 @@ class sfBasicSecurityUser extends sfUser implements sfSecurityUser
 
     if (!array_key_exists('timeout', $this->options))
     {
-      $this->options['timeout'] = 1800;
+      $this->options['timeout'] = self::SESSION_TIMEOUT;
     }
 
     // force the max lifetime for session garbage collector to be greater than timeout

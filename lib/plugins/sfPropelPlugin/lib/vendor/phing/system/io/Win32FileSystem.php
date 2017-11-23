@@ -16,7 +16,7 @@
  *
  * This software consists of voluntary contributions made by many individuals
  * and is licensed under the LGPL. For more information please see
- * <http://phing.info>. 
+ * <http://phing.info>.
  */
 
 include_once 'phing/system/io/FileSystem.php';
@@ -394,7 +394,7 @@ class Win32FileSystem extends FileSystem {
             }
             return (string) $drive.':'.$this->slashify(substr($path,2)); //fake it
         }
-        
+
         throw new Exception("Unresolvable path: " . $path);
     }
 
@@ -445,11 +445,16 @@ class Win32FileSystem extends FileSystem {
 
     /* -- Basic infrastructure -- */
 
-    /** compares file paths lexicographically */
-    function compare(PhingFile $f1, PhingFile $f2) {
+    /**
+     * compares file paths lexicographically
+     * @param PhingFile $f1
+     * @param PhingFile $f2
+     * @return boolean
+     */
+    function compare($f1, $f2) {
         $f1Path = $f1->getPath();
         $f2Path = $f2->getPath();
-        return (boolean) strcasecmp((string) $f1Path, (string) $f2Path);        
+        return (boolean) strcasecmp((string) $f1Path, (string) $f2Path);
     }
 
 
@@ -471,7 +476,7 @@ class Win32FileSystem extends FileSystem {
         @closedir($dir);
         return $vv;
     }
-    
+
 }
 
 

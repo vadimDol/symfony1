@@ -41,7 +41,7 @@ class sfGenerateProjectTask extends sfGeneratorBaseTask
     ));
 
     $this->addOptions(array(
-      new sfCommandOption('orm', null, sfCommandOption::PARAMETER_REQUIRED, 'The ORM to use by default', 'Doctrine'),
+      new sfCommandOption('orm', null, sfCommandOption::PARAMETER_REQUIRED, 'The ORM to use by default', 'Propel'),
       new sfCommandOption('installer', null, sfCommandOption::PARAMETER_REQUIRED, 'An installer script to execute', null),
     ));
 
@@ -59,7 +59,7 @@ for a new project in the current directory:
 If the current directory already contains a symfony project,
 it throws a [sfCommandException|COMMENT].
 
-By default, the task configures Doctrine as the ORM. If you want to use
+By default, the task configures Propel as the ORM. If you want to use
 Propel, use the [--orm|COMMENT] option:
 
   [./symfony generate:project blog --orm=Propel|INFO]
@@ -90,7 +90,7 @@ EOF;
       throw new sfCommandException(sprintf('A symfony project already exists in this directory (%s).', getcwd()));
     }
 
-    if (!in_array(strtolower($options['orm']), array('propel', 'doctrine', 'none')))
+    if (!in_array(strtolower($options['orm']), array('propel', 'none')))
     {
       throw new InvalidArgumentException(sprintf('Invalid ORM name "%s".', $options['orm']));
     }
@@ -126,7 +126,7 @@ EOF;
     $this->replaceTokens();
 
     // execute the choosen ORM installer script
-    if (in_array($options['orm'], array('Doctrine', 'Propel')))
+    if (in_array($options['orm'], array('Propel')))
     {
       include dirname(__FILE__).'/../../plugins/sf'.$options['orm'].'Plugin/config/installer.php';
     }

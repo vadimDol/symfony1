@@ -14,7 +14,7 @@
  * @package    symfony
  * @subpackage task
  * @author     Fabien Potencier <fabien.potencier@symfony-project.com>
- * @version    SVN: $Id: sfDeprecatedClassesValidation.class.php 24610 2009-11-30 22:07:34Z FabianLange $
+ * @version    SVN: $Id: sfDeprecatedClassesValidation.class.php 24706 2009-12-01 19:38:44Z fabien $
  */
 class sfDeprecatedClassesValidation extends sfValidation
 {
@@ -41,25 +41,24 @@ class sfDeprecatedClassesValidation extends sfValidation
   public function validate()
   {
     $classes = array(
-      'sfDoctrineLogger', 'sfNoRouting', 'sfPathInfoRouting', 'sfRichTextEditor',
+      'sfNoRouting', 'sfPathInfoRouting', 'sfRichTextEditor',
       'sfRichTextEditorFCK', 'sfRichTextEditorTinyMCE', 'sfCrudGenerator', 'sfAdminGenerator',
-      'sfPropelCrudGenerator', 'sfPropelAdminGenerator', 'sfPropelUniqueValidator', 'sfDoctrineUniqueValidator',
+      'sfPropelCrudGenerator', 'sfPropelAdminGenerator', 'sfPropelUniqueValidator',
       'sfLoader', 'sfConsoleRequest', 'sfConsoleResponse', 'sfConsoleController',
-      'sfDoctrineDataRetriever', 'sfPropelDataRetriever',
+       'sfPropelDataRetriever',
       'sfWidgetFormI18nSelectLanguage', 'sfWidgetFormI18nSelectCurrency', 'sfWidgetFormI18nSelectCountry',
-      'sfWidgetFormChoiceMany', 'sfWidgetFormPropelChoiceMany', 'sfWidgetFormDoctrineChoiceMany',
+      'sfWidgetFormChoiceMany', 'sfWidgetFormPropelChoiceMany',
       'sfValidatorChoiceMany', 'sfValidatorPropelChoiceMany', 'sfValidatorPropelDoctrineMany',
       'SfExtensionObjectBuilder', 'SfExtensionPeerBuilder', 'SfMultiExtendObjectBuilder',
       'SfNestedSetBuilder', 'SfNestedSetPeerBuilder', 'SfObjectBuilder', 'SfPeerBuilder',
       'sfWidgetFormPropelSelect', 'sfWidgetFormPropelSelectMany',
-      'sfWidgetFormDoctrineSelect', 'sfWidgetFormDoctrineSelectMany',
 
       // classes from sfCompat10Plugin
       'sfEzComponentsBridge', 'sfZendFrameworkBridge', 'sfProcessCache', 'sfValidatorConfigHandler',
       'sfActionException', 'sfValidatorException', 'sfFillInFormFilter', 'sfValidationExecutionFilter',
       'sfRequestCompat10', 'sfFillInForm', 'sfCallbackValidator', 'sfCompareValidator', 'sfDateValidator',
       'sfEmailValidator', 'sfFileValidator', 'sfNumberValidator', 'sfRegexValidator', 'sfStringValidator',
-      'sfUrlValidator', 'sfValidator\(', 'sfValidatorManager', 'sfMailView', 'sfMail\(',
+      'sfUrlValidator', 'sfValidator(', 'sfValidatorManager', 'sfMailView', 'sfMail(',
     );
 
     $found = array();
