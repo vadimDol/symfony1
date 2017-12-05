@@ -1,0 +1,2 @@
+all:
+  common_partials_path: %sf_root_dir%/templates

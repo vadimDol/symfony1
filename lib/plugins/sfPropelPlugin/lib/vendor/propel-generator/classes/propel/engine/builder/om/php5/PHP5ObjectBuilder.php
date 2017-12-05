@@ -2256,7 +2256,7 @@ abstract class " . $this->getClassname() . " extends " . ClassTools::classname($
      *
      * This will only work if the object has been saved and has a valid primary key set.
      *
-     * @param      boolean \$deep (optional) Whether to also de-associated any related objects.
+     * @param      boolean \$deep (optional) Whether to de-associate any related objects.
      * @param      PropelPDO \$con (optional) The PropelPDO connection to use.
      * @return     void
      * @throws     PropelException - if this object is deleted, unsaved or doesn't have pk match in db

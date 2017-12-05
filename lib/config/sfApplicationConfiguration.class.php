@@ -113,7 +113,7 @@ abstract class sfApplicationConfiguration extends ProjectConfiguration
     $this->dispatcher->connect('autoload.filter_config', array($this, 'filterAutoloadConfig'));
     sfAutoload::getInstance()->register();
 
-    if ($this->isDebug())
+    if ($this->isDebug() && (sfConfig::get('sf_environment') != 'test') && !sfConfig::get('sf_test'))
     {
       sfAutoloadAgain::getInstance()->register();
     }

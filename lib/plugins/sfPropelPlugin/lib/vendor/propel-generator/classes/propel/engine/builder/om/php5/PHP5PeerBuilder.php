@@ -758,6 +758,33 @@ abstract class " . $this->getClassname() . $extendingPeerClass . "
     }
 
     /**
+     * Adds the doSelectColumn() method.
+     * @param string &$script
+     */
+    protected function addDoSelectColumn(&$script)
+    {
+        $script .= "
+     /**
+     * @param Criteria \$criteria
+     * @param string \$column
+     * @param PropelPDO \$con the connection to use
+     * @return array
+     */
+    public static function doSelectColumn(Criteria \$criteria, \$column, PropelPDO \$con = null)
+    {
+        if (\$con === null)
+        {
+            \$con = Propel::getConnection(self::DATABASE_NAME, Propel::CONNECTION_READ);
+        }
+    
+        \$criteria->addSelectColumn(\$column);
+        \$stmt = self::doSelectStmt(\$criteria, \$con);
+        return \$stmt->fetchAll(PDO::FETCH_COLUMN);
+    }
+        ";
+    }
+
+    /**
      * Adds the PHP code to return a instance pool key for the passed-in primary key variable names.
      *
      * @param      array $pkphp An array of PHP var names / method calls representing complete pk.

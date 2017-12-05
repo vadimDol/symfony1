@@ -37,3 +37,5 @@
 #- %SF_SYMFONY_LIB_DIR%/escaper/sfOutputEscaperGetterDecorator.class.php
 #- %SF_SYMFONY_LIB_DIR%/escaper/sfOutputEscaperIteratorDecorator.class.php
 #- %SF_SYMFONY_LIB_DIR%/escaper/sfOutputEscaperObjectDecorator.class.php
+
+

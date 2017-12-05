@@ -176,6 +176,21 @@ class sfCoreAutoload
   // Don't edit this property by hand.
   // To update it, use sfCoreAutoload::make()
   protected $classes = array(
+    'dumper' => 'Component/Yaml/Dumper.php',
+    'escaper' => 'Component/Yaml/Escaper.php',
+    'dumpexception' => 'Component/Yaml/Exception/DumpException.php',
+    'exceptioninterface' => 'Component/Yaml/Exception/ExceptionInterface.php',
+    'parseexception' => 'Component/Yaml/Exception/ParseException.php',
+    'runtimeexception' => 'Component/Yaml/Exception/RuntimeException.php',
+    'inline' => 'Component/Yaml/Inline.php',
+    'parser' => 'Component/Yaml/Parser.php',
+    'dumpertest' => 'Component/Yaml/Tests/DumperTest.php',
+    'inlinetest' => 'Component/Yaml/Tests/InlineTest.php',
+    'parseexceptiontest' => 'Component/Yaml/Tests/ParseExceptionTest.php',
+    'parsertest' => 'Component/Yaml/Tests/ParserTest.php',
+    'yamltest' => 'Component/Yaml/Tests/YamlTest.php',
+    'unescaper' => 'Component/Yaml/Unescaper.php',
+    'yaml' => 'Component/Yaml/Yaml.php',
     'sfaction' => 'action/sfAction.class.php',
     'sfactionstack' => 'action/sfActionStack.class.php',
     'sfactionstackentry' => 'action/sfActionStackEntry.class.php',
