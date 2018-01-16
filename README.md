@@ -5,9 +5,7 @@
 1 Способ:
 
 
-
-
-С помощью git
+С помощью git'а
 ```
     git init # ваш проект
     git submodule add https://github.com/vadimDol/symfony1 vendor/symfony
@@ -18,7 +16,7 @@
 
 С помощью [Composer](https://getcomposer.org/download/) 
 ```
-    composer require vadimdol/symfony1 "1.0"
+    composer require vadimdol/symfony1 "1.1"
 ```
 
 ------------
@@ -49,6 +47,3 @@
 -------------
 Официальная документация - [symfony1 documentation](http://symfony.com/legacy)
 
-## Contributing
-------------
-Вы можете отправить pull requests или создать issue.
